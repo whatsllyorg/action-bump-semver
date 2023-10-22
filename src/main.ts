@@ -6,7 +6,7 @@ async function run(): Promise<void> {
     const currentVersion = core.getInput('current_version');
     const bumpLevel = core.getInput('level');
 
-    const newVersion = await bumpSemver(currentVersion, bumpLevel,'rc');
+    const newVersion = await bumpSemver(currentVersion, bumpLevel);
     core.setOutput('new_version', newVersion);
   } catch (e) {
     core.error(e);
@@ -32,7 +32,7 @@ async function bumpSemver(
   // If the current version has 'v' prefix (e.g., v1.2.3), keep the prefix in the new version too.
   const hasVPrefix = currentVersion.startsWith('v');
 
-  const bumpedVersion = semver.inc(currentVersion, bumpLevel);
+  const bumpedVersion = semver.inc(currentVersion, bumpLevel, 'rc');
 
   let newVersion = bumpedVersion;
   if (hasVPrefix) {
