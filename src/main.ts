@@ -6,7 +6,7 @@ async function run(): Promise<void> {
     const currentVersion = core.getInput('current_version');
     const bumpLevel = core.getInput('level');
 
-    const newVersion = await bumpSemver(currentVersion, bumpLevel);
+    const newVersion = await bumpSemver(currentVersion, bumpLevel,'rc');
     core.setOutput('new_version', newVersion);
   } catch (e) {
     core.error(e);
